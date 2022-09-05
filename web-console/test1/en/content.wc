@@ -1,11 +1,8 @@
 # Title
+
 ## Subtitle
 
-This is a simple line.
-
-This is a *STRONG*, _italic_ and *_double_*/_*double*_
-
-This must escape \* the strong and only show \* the symbol.
+This is a simple line. To modify the color use <span class=".yellow_font">CLASS</span>
 
 ## Code section
 
