@@ -6,7 +6,7 @@ This is a simple line. To modify the color use <span class="black_font white_bac
 
 ## Code section
 
-```bash
+```
 #!/bin/bash
 
 my_function () {
