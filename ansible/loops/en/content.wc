@@ -1,0 +1,91 @@
+# Loops in ansible
+
+### 2022-09-09T01:21:39.743Z
+
+In ansible you can use different modes to iterate something, like any language with that capacity, you have two different modes:
+
+* Until a condition is false
+* Iterating all the items of a list
+
+Now, I will not explain that in detail, because probably you already know the differences between <span class='white_back black_font'>while</span>, <span class='white_back black_font'>for</span> and <span class='white_back black_font'>do while</span>. Now in ansible you can only use the while and the for, like this:
+
+## While
+
+This example repeat the function until the length of the file is equal to 10.
+
+```
+- name: Update web servers
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars:
+    counter: 1
+  tasks:
+    - shell: "echo 'This is a line' >> file.txt;cat file.txt"
+      register: output
+      until: output.stdout_lines|length == 10
+      retries: 15
+      delay: 1
+```
+
+## For
+
+This example shows all the items of a list.
+
+```
+- name: Update web servers
+  hosts: localhost
+  connection: local 
+  gather_facts: no
+  vars:
+    list:
+      - one
+      - two
+      - three
+  tasks:
+    - name: Debug task
+      debug:
+        msg: 'The item is [{{ item }}]'
+      loop: '{{ list }}'
+      loop_control:
+        loop_var: item
+```
+
+# Do While
+
+Now, unfortunately, ansible doesn't have any like the do while (perform the operation and then check the condition). But you can use a workaround like this:
+
+<span class='white_back cyan_font'>main.yml</span>
+```
+- name: Update web servers
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars:
+    per_page: 1
+    page: 1
+  tasks:
+    - include_tasks: ./loop.yaml
+```
+
+<span class='white_back cyan_font'>loop.yml</span>
+```
+- name: Get information from github
+  uri:
+    url: 'https://api.github.com/users/RobertoRojas/repos?per_page={{ per_page }}&page={{ page }}'
+  register: response
+- name: Show repo name
+  debug:
+    msg: "{{ response.json[0].name }}"
+  when: response.json|length > 0
+- name: Move page
+  set_fact:
+    page: '{{ page|int + 1 }}'
+  when: response.json|length > 0
+- include_tasks: ./loop.yaml
+  when: response.json|length > 0
+```
+
+In this case, you can see the usage of this in a pagination of a REST request. You can use this approach to improve yours playbooks.
+
+### Roberto Rojas
