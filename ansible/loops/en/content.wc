@@ -13,6 +13,7 @@ Now, I will not explain that in detail, because probably you already know the di
 
 This example repeat the function until the length of the file is equal to 10.
 
+<span class='blue_back cyan_font'>while.yml</span>
 ```
 - name: Update web servers
   hosts: 127.0.0.1
@@ -32,6 +33,7 @@ This example repeat the function until the length of the file is equal to 10.
 
 This example shows all the items of a list.
 
+<span class='blue_back cyan_font'>for.yml</span>
 ```
 - name: Update web servers
   hosts: localhost
@@ -55,7 +57,7 @@ This example shows all the items of a list.
 
 Now, unfortunately, ansible doesn't have any like the do while (perform the operation and then check the condition). But you can use a workaround like this:
 
-<span class='white_back cyan_font'>main.yml</span>
+<span class='blue_back cyan_font'>main.yml</span>
 ```
 - name: Update web servers
   hosts: 127.0.0.1
@@ -68,7 +70,7 @@ Now, unfortunately, ansible doesn't have any like the do while (perform the oper
     - include_tasks: ./loop.yaml
 ```
 
-<span class='white_back cyan_font'>loop.yml</span>
+<span class='blue_back cyan_font'>loop.yml</span>
 ```
 - name: Get information from github
   uri:
