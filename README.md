@@ -1,6 +1,37 @@
 # blog
 
-This repository store blog entries
+This repository store my blog entries. You can use this repository as example to implement it with [web-console](https://github.com/RobertoRojas/web-console).
+
+The standard of the wc files is:
+
+```
+# Title
+
+## Subtitle
+
+### Notes
+
+This is a simple line. To modify the color use <span class="black_font white_back">CLASS</span>
+
+## Code section
+
+---
+#!/bin/bash
+
+my_function () {
+  local func_result="some result"
+  echo "$func_result"
+}
+
+func_result="$(my_function)"
+echo $func_result
+---
+```
+[Standard](https://github.com/RobertoRojas/blog/blob/main/web-console/wvstandard/en/content.wc)
+
+The folders structure must be:
+
+> _root_/topic/entry/language/content.wc
 
 ## Colors
 

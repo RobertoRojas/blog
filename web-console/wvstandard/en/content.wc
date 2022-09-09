@@ -8,7 +8,7 @@ This is a simple line. To modify the color use <span class="black_font white_bac
 
 ## Code section
 
-```
+---
 #!/bin/bash
 
 my_function () {
@@ -18,4 +18,4 @@ my_function () {
 
 func_result="$(my_function)"
 echo $func_result
-```
+---

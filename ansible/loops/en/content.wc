@@ -14,7 +14,7 @@ Now, I will not explain that in detail, because probably you already know the di
 This example repeat the function until the length of the file is equal to 10.
 
 <span class='blue_back cyan_font'>while.yml</span>
-```
+---
 - name: Update web servers
   hosts: 127.0.0.1
   connection: local
@@ -27,14 +27,14 @@ This example repeat the function until the length of the file is equal to 10.
       until: output.stdout_lines|length == 10
       retries: 15
       delay: 1
-```
+---
 
 ## For
 
 This example shows all the items of a list.
 
 <span class='blue_back cyan_font'>for.yml</span>
-```
+---
 - name: Update web servers
   hosts: localhost
   connection: local 
@@ -51,14 +51,14 @@ This example shows all the items of a list.
       loop: '{{ list }}'
       loop_control:
         loop_var: item
-```
+---
 
 # Do While
 
 Now, unfortunately, ansible doesn't have any like the do while (perform the operation and then check the condition). But you can use a workaround like this:
 
 <span class='blue_back cyan_font'>main.yml</span>
-```
+---
 - name: Update web servers
   hosts: 127.0.0.1
   connection: local
@@ -68,10 +68,10 @@ Now, unfortunately, ansible doesn't have any like the do while (perform the oper
     page: 1
   tasks:
     - include_tasks: ./loop.yaml
-```
+---
 
 <span class='blue_back cyan_font'>loop.yml</span>
-```
+---
 - name: Get information from github
   uri:
     url: 'https://api.github.com/users/RobertoRojas/repos?per_page={{ per_page }}&page={{ page }}'
@@ -86,7 +86,7 @@ Now, unfortunately, ansible doesn't have any like the do while (perform the oper
   when: response.json|length > 0
 - include_tasks: ./loop.yaml
   when: response.json|length > 0
-```
+---
 
 In this case, you can see the usage of this in a pagination of a REST request. You can use this approach to improve yours playbooks.
 
